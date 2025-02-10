@@ -21,7 +21,6 @@ public class ProductController {
     public String createProductPage(Model model) {
         Product product = new Product();
 
-        model.addAttribute("action", "create");
         model.addAttribute("product", product);
         return "CreateProduct";
     }
@@ -31,6 +30,28 @@ public class ProductController {
         service.create(product);
         return "redirect:list";
     }
+
+    @GetMapping("/edit")
+    public String editProductPage(@RequestParam(value = "id", required = false) String ProductID,Model model) {
+        Product product = service.getProductByID(ProductID);
+
+        // Prevent IDOR :)
+        if (product == null) {
+            return "redirect:https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+
+        model.addAttribute("product", product);
+
+        return "EditProduct";
+    }
+
+    @PostMapping("/edit")
+    public String editProductPatch(@ModelAttribute Product product) {
+        service.editProduct(product);
+
+        return "redirect:list";
+    }
+
     // REST API DELETE METHOD
     @DeleteMapping("/delete")
     @ResponseBody

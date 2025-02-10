@@ -44,7 +44,7 @@
             <td th:text="${product.productQuantity}"></td>
             <td>
                 <div th:object="${product}">
-                    <button id="edit-button" class="btn btn-primary btn-sm" style="margin-right: 12px">Edit Product</button>
+                    <a id="edit-button" class="btn btn-primary btn-sm" style="margin-right: 12px" th:href="@{edit(id = ${product.getProductID()})}">Edit Product</a>
                     <button id="delete-button" class="btn btn-primary btn-sm" style="color: aliceblue" th:attr="onclick=|deleteProduct('*{productID}')|" >Delete Product</button>
                 </div>
             </td>
