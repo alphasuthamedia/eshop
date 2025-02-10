@@ -7,13 +7,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+// ADDED MANUALLY
+import java.util.UUID;
+
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
-    public Product createProduct(Product product) {
+    public Product create(Product product) {
         productData.add(product);
         return product;
+    }
+
+    public void delete(Product product) {
+        productData.remove(product);
     }
 
     public Iterator<Product> findAll() {
