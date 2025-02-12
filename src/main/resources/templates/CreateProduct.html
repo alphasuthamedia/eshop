@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <title>Create New Product</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERd`knLPMO" crossorigin="anonymous">
+
+    <script>
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 1000);
+    </script>
 </head>
 <body>
 
 <div class="container">
+    <h5 class="alert" id="positive_value_error" th:align="right" th:text="${positive_value_error}"></h5>
     <h3>Create New Product</h3>
     <form th:action="@{/product/create}" th:object="${product}" method="post">
         <div class="form-group">

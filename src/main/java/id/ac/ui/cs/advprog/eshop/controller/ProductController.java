@@ -27,8 +27,13 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createProductPost(@ModelAttribute Product product, Model model) {
-        service.create(product);
-        return "redirect:list";
+        if (service.create(product) != null) {
+            return "redirect:list";
+        }
+
+        model.addAttribute("product", product);
+        model.addAttribute("positive_value_error", "Please input a positive value for quantity");
+        return "CreateProduct";
     }
 
     @GetMapping("/edit")
