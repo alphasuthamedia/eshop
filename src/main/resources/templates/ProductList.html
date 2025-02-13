@@ -40,7 +40,7 @@
         </thead>
         <tbody>
         <tr th:each="product: ${products}" th:class="${product.getProductName()+','+product.getProductQuantity()}">
-            <td th:text="${product.productName}"></td>
+            <td th:text="${#strings.escapeXml(product.productName)}"></td>
             <td th:text="${product.productQuantity}"></td>
             <td>
                 <div th:object="${product}">

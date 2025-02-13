@@ -40,7 +40,7 @@ public class ProductController {
     public String editProductPage(@RequestParam(value = "id", required = false) String ProductID,Model model) {
         Product product = service.getProductByID(ProductID);
 
-        // Prevent IDOR :)
+        // Prevent IDOR :) if product ID didnt exist
         if (product == null) {
             return "redirect:https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
