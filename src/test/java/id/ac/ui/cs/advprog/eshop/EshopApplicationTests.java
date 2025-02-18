@@ -10,4 +10,12 @@ class EshopApplicationTests {
     void contextLoads() {
     }
 
+    /*
+    Test if everything is callable
+    it means, we have to test the grandfather of the grandfather of this project is working
+     */
+    @Test
+    public void applicationContextTest() {
+        EshopApplication.main(new String[] {});
+    }
 }
