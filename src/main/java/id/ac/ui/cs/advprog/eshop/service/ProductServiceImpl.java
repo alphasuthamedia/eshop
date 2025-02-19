@@ -56,12 +56,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void removeByID(String ID) {
+    public String removeByID(String ID) {
         for (Product product : findAll()) {
             if (product.getProductID().equals(ID)) {
                 productRepository.delete(product);
-                return;
+                return product.getProductID();
             }
         }
+        return null;
     }
 }

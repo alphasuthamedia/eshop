@@ -62,7 +62,12 @@ public class CreateProductFunctionalTest {
 
     @Test
     void createNewProduct_isCorrect(ChromeDriver driver) throws Exception {
-        assertNotNull(createProduct_test(driver));
+        assertNotNull(createProduct_test(driver, "DUMMY", 64));
+    }
+
+    @Test
+    void createNewWrongProduct_isCorrect(ChromeDriver driver) throws Exception {
+        assertNull(createProduct_test(driver,  "DUMMY2", -1));
     }
 
     String canClickTheButton_test(ChromeDriver driver){
@@ -71,26 +76,29 @@ public class CreateProductFunctionalTest {
         createProductButton.click();
 
         // Verify --> shall be directed to create new product page (check the title)
-        String pageTitle = driver.findElement(By.tagName("h3")).getText();
-        return pageTitle;
+        return driver.findElement(By.tagName("h3")).getText();
     }
 
-    String createProduct_test(ChromeDriver driver){
+    WebElement createProduct_test(ChromeDriver driver, String name, int quantity){
         driver.get(baseUrl);
         driver.navigate().to(baseUrl+"/product/create");
 
         WebElement addProductName = driver.findElement(By.id("create-nameInput"));
-        addProductName.sendKeys("DUMMY_NAME");
+        addProductName.sendKeys(name);
 
         WebElement addProductQuantity = driver.findElement(By.id("create-quantityInput"));
-        addProductQuantity.sendKeys("64");
+        addProductQuantity.clear();
+        addProductQuantity.sendKeys(quantity+""); // has to be a string
 
         WebElement saveButton = driver.findElement(By.id("submit-button"));
         saveButton.click();
 
-        String newProductName = driver.findElement(By.className("DUMMY_NAME"+","+"64")).getText();
+        try {
+            return driver.findElement(By.className(name+","+quantity));
+        } catch (Exception e) {
+            return null;
+        }
 
-        return newProductName;
     }
 
 }
