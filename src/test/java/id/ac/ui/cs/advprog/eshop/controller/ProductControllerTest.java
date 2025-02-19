@@ -22,10 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -98,20 +94,6 @@ class ProductControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
 
-//
-//    @Test
-//    void testProductListPage() throws Exception {
-//        List<Product> products = Arrays.asList(new Product(), new Product());
-//        when(productService.findAll()).thenReturn(products);
-//
-//        mockMvc.perform(get("/product/list"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("productList"))
-//                .andExpect(model().attributeExists("products"));
-//
-//        verify(productService, times(1)).findAll();
-//    }
-//
     @Test
     void testDeleteProductPost() throws Exception {
         Product product = new Product();
@@ -176,6 +158,5 @@ class ProductControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("list"));
 
-//        verify(productService, times(1)).update(any(Product.class));
     }
 }
