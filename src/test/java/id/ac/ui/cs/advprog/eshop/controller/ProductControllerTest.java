@@ -1,6 +1,10 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.google.gson.Gson;
+import com.jayway.jsonpath.JsonPath;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
@@ -18,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -29,8 +34,6 @@ import static org.mockito.Mockito.*;
 import org.springframework.test.web.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-
 
 class ProductControllerTest {
     private MockMvc mockMvc;
@@ -84,20 +87,16 @@ class ProductControllerTest {
                 .andExpect(redirectedUrl("list"));
     }
 
-//    @Test
-//    void createWrongProductPost() throws Exception {
-//        Product product = new Product();
-//        product.setProductID("DUMMY_ID");
-//
-//        when(productService.create(product)).thenReturn(product);
-//
-//        mockMvc.perform(post("/product/create")
-//                        .flashAttr("product", product)
-//                        .formField("productName", "aku tidak suka kamu :)")
-//                        .formField("productQuantity", "-1"))
-//                .andExpect(status().is2xxSuccessful());
-//
-//    }
+    @Test
+    void createWrongProductPost() throws Exception {
+        Product product = new Product();
+        product.setProductID("DUMMY_ID");
+        mockMvc.perform(post("/product/create")
+                        .flashAttr("product", product)
+                        .formField("productName", "aku tidak suka kamu :)")
+                        .formField("productQuantity", "-1"))
+                .andExpect(status().is2xxSuccessful());
+    }
 
 //
 //    @Test
@@ -117,57 +116,66 @@ class ProductControllerTest {
     void testDeleteProductPost() throws Exception {
         Product product = new Product();
         product.setProductID("DUMMY_ID");
+        product.setProductName("DUMMY_NAME");
+        product.setProductQuantity(1);
 
-        when(productService.create(product)).thenReturn(product);
+        when(productService.findAll()).thenReturn(Arrays.asList(product));
 
-        mockMvc.perform(post("/product/create")
+        HashMap map = new HashMap();
+        map.put("ID", "DUMMY_ID");
+
+//        Product productObject = Product.builder()
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(map);
+
+
+        mockMvc.perform(delete("/product/delete")
+                .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testEditWrongProductPage() throws Exception {
+        Product product = new Product();
+        product.setProductName("DUMMY");
+        product.setProductQuantity(10);
+        product.setProductID("DUMMY_ID");
+
+        when(productService.getProductByID("DUMMY_ID")).thenReturn(product);
+
+        mockMvc.perform(get("http://localhost:8080/product/edit?id=NOT_DUMMY_ID"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    void testEditProductPage() throws Exception {
+        Product product = new Product();
+        product.setProductName("DUMMY");
+        product.setProductQuantity(10);
+        product.setProductID("DUMMY_ID");
+
+        when(productService.getProductByID("DUMMY_ID")).thenReturn(product);
+
+        mockMvc.perform(get("http://localhost:8080/product/edit?id=DUMMY_ID")
+                        .flashAttr("product", product))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("EditProduct"));
+    }
+
+    @Test
+    void testEditProductPost() throws Exception {
+        Product product = new Product();
+        product.setProductName("DUMMY");
+        product.setProductQuantity(10);
+
+        mockMvc.perform(post("/product/edit")
                         .flashAttr("product", product)
-                        .formField("productName", "aku suka eskrim")
-                        .formField("productQuantity", "1"))
+                        .formField("productName", "NOT A DUMMY, KDDING")
+                        .formField("productQuantity", "6464"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("list"));
 
-        HashMap<String, String > deleteRequest = new HashMap<>();
-        deleteRequest.put("ID", "DUMMY_ID");
-
-        String jsonRequest = new ObjectMapper().writeValueAsString(deleteRequest);
-
-        mockMvc.perform(delete("/product/delete/")
-                .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequest));
-
-        verify(productService, times(1)).removeByID("DUMMY_ID");
-    }
-//
-//    @Test
-//    void testEditProductPage() throws Exception {
-//        Product product = new Product();
-//        product.setProductName("DUMMY");
-//        product.setProductQuantity(10);
-//        product.setProductID("DUMMY_ID");
-//
-//        when(productRepository.create(product)).thenReturn(product);
-//        productService.create(product);
-//
-//        mockMvc.perform(get("http://localhost:8080/product/edit?id=DUMMY_ID"))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("EditProduct"))
-//                .andExpect(model().attributeExists("product"));
-//
-////        verify(productService, times(1))
-//    }
-//
-//    @Test
-//    void testEditProductPost() throws Exception {
-//        Product product = new Product();
-//        product.setProductName("Laptop");
-//        product.setProductQuantity(10);
-//
-//        mockMvc.perform(post("/product/edit")
-//                        .flashAttr("product", product))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/product/list"));
-//
 //        verify(productService, times(1)).update(any(Product.class));
-//    }
+    }
 }

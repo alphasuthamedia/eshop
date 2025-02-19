@@ -60,8 +60,8 @@ public class ProductController {
     // REST API DELETE METHOD
     @DeleteMapping("/delete")
     @ResponseBody
-    public void deleteProduct(@ModelAttribute Product product, @RequestBody HashMap deleteRequest) {
-        service.removeByID(deleteRequest.get("ID").toString());
+    public String deleteProduct(@ModelAttribute Product product, @RequestBody HashMap deleteRequest) {
+        return service.removeByID(deleteRequest.get("ID").toString());
     }
 
     @GetMapping("/list")
