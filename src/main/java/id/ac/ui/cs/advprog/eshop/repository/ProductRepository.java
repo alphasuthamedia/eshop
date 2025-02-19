@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-// ADDED MANUALLY
-import java.util.UUID;
 
 @Repository
 public class ProductRepository {
