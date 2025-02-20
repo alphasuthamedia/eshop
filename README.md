@@ -1,7 +1,7 @@
 # Advance Programming Course
 This repository contains the modules, tutorials, and exercises for the Advance Programming Course.
 
-
+## Tutorial 1
 ### Reflection 1: Clean Code and Secure Coding Practices
 #### **Clean Code Principles**
 1. **Meaningful Names**
@@ -188,3 +188,17 @@ This repository contains the modules, tutorials, and exercises for the Advance P
      * Reduce code duplication
      * Improve readibility and maintainability
      * Make it easier to understand and add test cases
+
+## Tutorial 2
+### Reflection 1
+1. After integrating sonarcloud and pmd to my github branch, i notice that there were some error happens. Indeed that i have to fix it, but it wasnt the critical erros. Some of them are like :
+    * Unused Import
+      Sometimes when i code, i have to import some packages. But then, at the end i havent use that package(s), it isnt because i do randomg import but, i found the better library or packages that i confident to use it. That is the biggest reason why there is so much erros because unused import.
+    * Wrong Dependency Configuretion
+    * At first, i thought i want to go with sonarcloud. The reason is simple, it is widely used in current industrial standard. But then, something unusual happens, my test facing errors and its because the sonarcloud server terminates it. After some review (gsgs : google sana gooogle sini), sonarcloud only allow us (as a free user) to aotomate testing using a single branch. And then, i quickly swap using pmd because i havent get gitlab csui account for sonarcube yet. It became a reason why my build dependency was messed up. I haavent remove the build dependency for sonarcloud yet... now its fixed.
+
+2. Ya. After some review, i hereby decree that my project has qualified as continuous integration and continuous deployment industry standard. Why? the reason is :
+    * Continuous Integraion : there is a file named as "ci.yaml" that build (gradle) everytime every push and pull request. ci.yaml also triggers jacoco test by running test (the whole test). So that, my integrations was automaticly triggered by that file.
+    * Continuous Deployment : since im using koyeb, it has automatic configuration to let out program deployed on every push (main branch).  Then i was successfully implementing the continuous deployment.
+
+[!https://private-alikee-alphasuthamedia-920b7801.koyeb.app/] : just try, click it. i promise, you wont be disappointed. just click it.
