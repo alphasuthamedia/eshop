@@ -9,12 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class CarServiceImpl implements CarService {
+public class CarServiceImpl implements id.ac.ui.cs.advprog.eshop.service.Service<Car> {
     @Autowired
     private CarRepository carRepository;
+
     @Override
     public Car create(Car car) {
-        // todo auto generated method sub
         carRepository.create(car);
         return car;
     }
@@ -26,18 +26,19 @@ public class CarServiceImpl implements CarService {
         return allCars;
     }
     @Override
-    public Car findByID(String carID) {
+    public Car getItemByID(String carID) {
         Car car = carRepository.findByID(carID);
         return car;
     }
+
     @Override
-    public void update(String carID, Car car) {
-        // todo auto generated method stub
-        carRepository.update(carID, car);
+    public void editItem(Car car) {
+        carRepository.update(car);
     }
+
     @Override
-    public void deleteCarByID(String carID) {
-        // todo auto generated method stub
+    public String removeByID(String carID) {
         carRepository.delete(carID);
+        return "";
     }
 }

@@ -1,33 +1,21 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.google.gson.Gson;
-import com.jayway.jsonpath.JsonPath;
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
-import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
-import org.hamcrest.Matchers;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.openqa.selenium.json.Json;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
-import org.springframework.test.web.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

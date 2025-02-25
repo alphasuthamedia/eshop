@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements id.ac.ui.cs.advprog.eshop.service.Service<Product> {
 
     @Autowired
     private ProductRepository productRepository;
@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductByID(String ID) {
+    public Product getItemByID(String ID) {
         Product product = null;
         for (Product i : findAll()) {
             if (i.getProductID().equals(ID)) {
@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void editProduct(Product product) {
+    public void editItem(Product product) {
         for (Product i : findAll()) {
             if (i.getProductID().equals(product.getProductID())) {
                 i.setProductName(product.getProductName());
