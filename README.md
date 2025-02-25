@@ -204,3 +204,19 @@ This repository contains the modules, tutorials, and exercises for the Advance P
 [!https://private-alikee-alphasuthamedia-920b7801.koyeb.app/] : just try, click it. i promise, you wont be disappointed. just click it.
 
 ![image](https://github.com/user-attachments/assets/6e130c67-1a6b-49da-b6f0-9ca990453c5d)
+
+## Tutorial 3
+### Reflection 1
+Before i wrote the reflection, i guess it is better to note what SOLID principle is.
+SOLID :
+1. Single Responsibility Principle
+2. Open/closed Principle
+3. Liskov Substitution Principle
+4. Interface Segregation Principle
+5. Dependency Inversion Principle
+
+Lets inspect to my code... To implement Single Responsibility Principle, we have to know what Single Responsibility Principle is.. Its a principle where defining that A class os any object only responbible for one small task. Here in my code, i noticed that theres CarController class inside Product Controler. Smells weird, because a class should only responsible for one small task.. So then i splitted the Controller (between) Product Controller and Car Controller.
+Lets Have a look at Open/closed Princple. Its a princple that we have to maintain or make our clode is implementable or developeable but closed to get modification. By creating a service interface that can be implementable for any types of item, i've already pass this principle. The reason is, with using a single interface (Service.java) it can be implemented for CarService and ProductService so it is so.. developable but with general service function, we dont have to consider to modify that base service class, because it wont be nyangkut for any java object/class that will implemented using that base interface.
+Interface that we've been create, is 100% implementable with any service for any item. it has to be implemented 100% because it is only general method and weve ensure that the functionality has to derived aka implemented for any class or object that iimplements that base class. So, by this fact.. Weve already implements Liskov Segregation Princple.
+Since the service that weve built in simple enough (not such a large interface) so weve already pass Interface Segregation Principle. it is because our interface isnt the enourmous big and what method(s) that available in that intrface is genuinely required by any other service type that implements them.
+Last but not least, Insted of just creating concrete class, ive impelemented service interface<T>. T can be anything, or as a java devs we said that T is an Object.. So T can be Car or a Product. Using this way, weve implemented Dependency Inversion Princple, because high-level modules do not depend on low-level modules.
