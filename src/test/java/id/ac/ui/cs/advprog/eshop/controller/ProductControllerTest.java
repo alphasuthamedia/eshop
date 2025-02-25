@@ -112,7 +112,7 @@ class ProductControllerTest {
         product.setProductQuantity(10);
         product.setProductID("DUMMY_ID");
 
-        when(productService.getProductByID("DUMMY_ID")).thenReturn(product);
+        when(productService.getItemByID("DUMMY_ID")).thenReturn(product);
 
         mockMvc.perform(get("http://localhost:8080/product/edit?id=NOT_DUMMY_ID"))
                 .andExpect(status().is3xxRedirection());
@@ -125,7 +125,7 @@ class ProductControllerTest {
         product.setProductQuantity(10);
         product.setProductID("DUMMY_ID");
 
-        when(productService.getProductByID("DUMMY_ID")).thenReturn(product);
+        when(productService.getItemByID("DUMMY_ID")).thenReturn(product);
 
         mockMvc.perform(get("http://localhost:8080/product/edit?id=DUMMY_ID")
                         .flashAttr("product", product))

@@ -39,7 +39,7 @@ class ProductServiceImplTest {
         Iterator<Product> iterator = Arrays.asList(product1).iterator();
         when(productRepository.findAll()).thenReturn(iterator);
 
-        assertNull(productService.getProductByID("DUUMYX_ID"));
+        assertNull(productService.getItemByID("DUUMYX_ID"));
     }
 
     @Test
@@ -52,7 +52,7 @@ class ProductServiceImplTest {
         Iterator<Product> iterator = Arrays.asList(product1).iterator();
         when(productRepository.findAll()).thenReturn(iterator);
 
-        assertEquals("DUMMY1", productService.getProductByID(product1.getProductID()).getProductName());
+        assertEquals("DUMMY1", productService.getItemByID(product1.getProductID()).getProductName());
     }
 
     @Test
@@ -135,7 +135,7 @@ class ProductServiceImplTest {
         productAfter.setProductQuantity(1);
         productAfter.setProductID("DUMMY_BEFORE_ID");
 
-        productService.editProduct(productAfter);
+        productService.editItem(productAfter);
     }
 
     @Test
@@ -153,6 +153,6 @@ class ProductServiceImplTest {
         productAfter.setProductQuantity(1);
         productAfter.setProductID("DUMMY_AFTER_ID");
 
-        productService.editProduct(productAfter);
+        productService.editItem(productAfter);
     }
 }
