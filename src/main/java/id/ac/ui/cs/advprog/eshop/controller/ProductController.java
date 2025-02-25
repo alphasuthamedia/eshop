@@ -1,9 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
-import id.ac.ui.cs.advprog.eshop.model.Car;
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
-import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
-    private ProductService service;
+    private Service<Product> service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
@@ -40,7 +37,7 @@ public class ProductController {
 
     @GetMapping("/edit")
     public String editProductPage(@RequestParam(value = "id", required = false) String ProductID,Model model) {
-        Product product = service.getProductByID(ProductID);
+        Product product = service.getItemByID(ProductID);
 
         // Prevent IDOR :) if product ID didnt exist
         if (product == null) {
@@ -54,7 +51,7 @@ public class ProductController {
 
     @PostMapping("/edit")
     public String editProductPatch(@ModelAttribute Product product) {
-        service.editProduct(product);
+        service.editItem(product);
 
         return "redirect:list";
     }
