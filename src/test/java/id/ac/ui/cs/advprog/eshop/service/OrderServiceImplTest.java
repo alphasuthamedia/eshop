@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
@@ -30,7 +32,7 @@ class OrderServiceImplTest {
     void setUp() {
         List<Product> products = new ArrayList<>();
         Product product1 = new Product();
-        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(2);
         products.add(product1);
@@ -63,7 +65,7 @@ class OrderServiceImplTest {
         Order order = orders.get(1);
         Order newOrder = new Order(order.getId(), order.getProducts(), order.getOrderTime(), order.getAuthor(), OrderStatus.SUCCESS.getValue());
         doReturn(order).when(orderRepository).findById(order.getId());
-        doReturn(newOrder).when(orderRepository).save(any(order.class));
+        doReturn(newOrder).when(orderRepository).save(any(Order.class));
 
         Order result = orderService.updateStatus(order.getId(), OrderStatus.SUCCESS.getValue());
 
