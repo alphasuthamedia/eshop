@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,17 +17,16 @@ public class Payment {
     Map<String, String> paymentData;
 
     public void setPaymentData(Map<String, String> paymentData) {
-        String[] statusList = {"SUCCESS", "REJECTED"};
 
         String voucherCode = paymentData.get("voucherCode");
 
         if (voucherCode.length() != 16) {
-            this.status = statusList[1];
+            this.status = PaymentStatus.REJECT.getValue();
             return;
         }
 
         if (!voucherCode.startsWith("ESHOP")) {
-            this.status = statusList[1];
+            this.status = PaymentStatus.REJECT.getValue();;
             return;
         }
 
@@ -38,11 +38,11 @@ public class Payment {
         }
 
         if (numericCharCount != 8) {
-            this.status = statusList[1];
+            this.status = PaymentStatus.REJECT.getValue();;
             return;
         }
 
-        this.status = statusList[0];
+        this.status = PaymentStatus.SUCCESS.getValue();;
         this.paymentData = paymentData;
         return;
     }
