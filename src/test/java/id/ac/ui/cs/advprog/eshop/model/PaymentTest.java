@@ -55,17 +55,16 @@ public class PaymentTest{
     @Test
     void testCreateFailedPayment() {
         Map<String, String> newData = new HashMap<>();
-        newData.put("voucherCode", "ALPHAGANTENXX");
+        newData.put("voucherCode", "INFOPCMURAH");
 
         Payment payment = new Payment();
         String uuid = UUID.randomUUID().toString();
         payment.setId(uuid);
         payment.setMethod("voucherCode");
-        payment.setPaymentData(voucherData);
+        payment.setPaymentData(newData);
         payment.setStatus("SUCCESS");
 
         assertEquals(uuid, payment.getId());
-        assertNotEquals("ESHOP1234ABC5678", newData.get("voucherCode"));
         assertEquals("voucherCode", payment.getMethod());
         assertEquals("REJECTED", payment.getStatus());
     }
