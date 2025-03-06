@@ -15,7 +15,7 @@ public class PaymentTest{
     private Map<String, String> voucherData;
     @BeforeEach
     void setUp() {
-        voucherData = new HashMap<>();
+        voucherData = new HashMap<String, String>();
         voucherData.put("voucherCode", "ESHOP1234ABC5678");
     }
 
