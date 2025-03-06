@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,6 +20,15 @@ public class Payment {
     public void setPaymentData(Map<String, String> paymentData) {
 
         String voucherCode = paymentData.get("voucherCode");
+
+        if (voucherCode == null) {
+            if (this.method == PaymentMethod.BY_COD.getValue()) {
+                if (paymentData.get("address") != null && paymentData.get("deliveryFee") != null) {
+                    this.status = PaymentStatus.SUCCESS.getValue();
+                }
+            }
+            return;
+        }
 
         if (voucherCode.length() != 16) {
             this.status = PaymentStatus.REJECT.getValue();
