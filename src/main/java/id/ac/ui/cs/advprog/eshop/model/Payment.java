@@ -27,6 +27,7 @@ public class Payment {
                     this.status = PaymentStatus.SUCCESS.getValue();
                 }
             }
+            this.status = PaymentStatus.REJECT.getValue();
             return;
         }
 
