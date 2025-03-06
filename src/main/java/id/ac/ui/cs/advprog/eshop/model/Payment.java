@@ -22,7 +22,7 @@ public class Payment {
         String voucherCode = paymentData.get("voucherCode");
 
         if (voucherCode == null) {
-            if (this.method == PaymentMethod.BY_COD.getValue()) {
+            if (this.method.equals(PaymentMethod.BY_COD.getValue())) {
                 if (paymentData.get("address") != null && paymentData.get("deliveryFee") != null) {
                     this.status = PaymentStatus.SUCCESS.getValue();
                 }
