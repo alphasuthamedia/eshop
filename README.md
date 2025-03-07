@@ -222,3 +222,18 @@ Since the service that weve built in simple enough (not such a large interface) 
 Last but not least, Insted of just creating concrete class, ive impelemented service interface<T>. T can be anything, or as a java devs we said that T is an Object.. So T can be Car or a Product. Using this way, weve implemented Dependency Inversion Princple, because high-level modules do not depend on low-level modules.
 
 After implementing SOLID my code is absolutely readable. It is easy to understand the relationship between superclass subclass relationship because with the principle that we can not modify the superclass. The downside of not impelementing solid can be known before im doing solid refactoring. My code is not so readable, because there is unmatched dependency or tendention in my code such as a car controller in product controller, it makes hard to read an even harder to understand the projuct structuer. After im implementing solid, i can tell that the main difference before and after implementingn solid is, my code is absolutely readable (at least more readable) and more easier to understand my code structure.
+
+## Tutorial 4
+### Reflection 1
+Setelah mengikuti Tutorial Modul 4, saya merasa pendekatan Test-Driven Development (TDD) memberikan banyak keuntungan dalam proses pengembangan perangkat lunak. Dengan memulai dengan menulis unit test untuk skenario positif dan negatif, kita dapat menetapkan ekspektasi yang jelas terhadap logika program. Pendekatan ini membantu mengurangi kemungkinan adanya bug karena setiap bagian kode sudah diuji terlebih dahulu sebelum digabungkan dengan proyek utama, sehingga bug dapat ditemukan lebih awal.
+
+Penerapan TDD yang tepat seharusnya membuat proses pengembangan menjadi lebih efisien. Dengan deteksi dan perbaikan bug di tahap awal, tim pengembang tidak perlu menghabiskan waktu untuk debugging yang intensif selama proses pengembangan. Selain itu, jika TDD diterapkan dengan baik, jumlah bug yang muncul setelah peluncuran aplikasi akan lebih sedikit. Tanpa TDD, kemungkinan besar akan ada lebih banyak bug yang harus ditemukan dan diperbaiki, bahkan oleh pengguna setelah produk diluncurkan. Oleh karena itu, TDD merupakan pendekatan yang sangat efektif untuk membuat pengembangan perangkat lunak menjadi lebih efisien secara keseluruhan.
+
+Prinsip FIRST dalam TDD juga diterapkan dengan baik dalam proses ini:
+
+- **Fast (Cepat):** Proses pengujian berlangsung cepat karena menggunakan mock, yang menggantikan operasi database asli yang cenderung memakan waktu.
+- **Independent (Mandiri):** Setiap pengujian dirancang secara independen, memastikan bahwa setiap tes fokus pada satu logika tertentu dengan data yang sudah dipersiapkan sebelumnya, sehingga menghindari ketergantungan antar tes.
+- **Repeatable (Dapat Diulang):** Hasil pengujian konsisten berkat penggunaan data pengujian yang tetap dan repositori buatan yang menghindari interaksi langsung dengan codebase asli.
+- **Self-validating (Validasi Diri):** Proses penilaian hasil tes menjadi lebih mudah dengan adanya assertion yang jelas, yang menentukan apakah tes tersebut lulus atau gagal.
+
+Meskipun cakupan pengujian sudah cukup baik, masih ada ruang untuk perbaikan, seperti menambah pengujian parameterized dan memperluas cakupan untuk edge cases. Pendekatan TDD tidak hanya membantu mendeteksi bug lebih awal, tetapi juga dapat meningkatkan kualitas kode secara keseluruhan dan mempercepat siklus pengembangan.
