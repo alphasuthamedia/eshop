@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class PaymentServiceImplTest {
     @InjectMocks
-    PaymentService paymentService;
+    PaymentServiceImpl paymentService;
 
     @Mock
     PaymentRepository paymentRepository;
@@ -47,7 +47,6 @@ class PaymentServiceImplTest {
 
         order1 = new Order(UUID.randomUUID().toString(), products1, 1708560000L, "Safira Jenner");
         order2 = new Order(UUID.randomUUID().toString(), products2, 1708570000L, "Bambang Jenner");
-
         // Setup PaymentData
         paymentDataVoucher = Map.of("voucherCode", "ESHOP1234ABC5678");
         paymentDataCod = Map.of(
