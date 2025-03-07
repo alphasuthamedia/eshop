@@ -21,7 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment addPayment(Order order, String method, Map<String, String> paymentData) {
         Payment payment = new Payment();
 
-        payment.setId(UUID.randomUUID().toString());
+        payment.setId(order.getId()); // set 1-1 order dan payemtn
         payment.setMethod(method);
         payment.setPaymentData(paymentData);
 
