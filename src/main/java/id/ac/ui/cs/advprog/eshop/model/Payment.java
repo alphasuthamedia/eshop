@@ -16,6 +16,7 @@ public class Payment {
     String method;
     String status;
     Map<String, String> paymentData;
+    Order order;
 
     public void setPaymentData(Map<String, String> paymentData) {
 
