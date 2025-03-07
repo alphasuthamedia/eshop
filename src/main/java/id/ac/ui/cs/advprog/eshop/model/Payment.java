@@ -16,29 +16,28 @@ public class Payment {
     String method;
     String status;
     Map<String, String> paymentData;
-    Order order;
 
     public void setPaymentData(Map<String, String> paymentData) {
-
         String voucherCode = paymentData.get("voucherCode");
 
         if (voucherCode == null) {
             if (this.method.equals(PaymentMethod.BY_COD.getValue())) {
                 if (paymentData.get("address") != null && paymentData.get("deliveryFee") != null) {
-                    this.status = PaymentStatus.SUCCESS.getValue();
+                    this.paymentData = paymentData;
+                    return;
                 }
             }
-            this.status = PaymentStatus.REJECT.getValue();
+            this.status = PaymentStatus.REJECTED.getValue();
             return;
         }
 
         if (voucherCode.length() != 16) {
-            this.status = PaymentStatus.REJECT.getValue();
+            this.status = PaymentStatus.REJECTED.getValue();
             return;
         }
 
         if (!voucherCode.startsWith("ESHOP")) {
-            this.status = PaymentStatus.REJECT.getValue();;
+            this.status = PaymentStatus.REJECTED.getValue();;
             return;
         }
 
@@ -50,7 +49,7 @@ public class Payment {
         }
 
         if (numericCharCount != 8) {
-            this.status = PaymentStatus.REJECT.getValue();;
+            this.status = PaymentStatus.REJECTED.getValue();;
             return;
         }
 
@@ -64,21 +63,12 @@ public class Payment {
         return paymentData;
     }
 
-    public String setStatus(String status) {
-
-        if (this.status == null) {
-            return status;
+    public void setStatus(String status) {
+        if (PaymentStatus.contains(status)) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException("Status must be contained on PaymentStatus Enum");
         }
-
-        if (this.status.equals(status)) {
-            return this.status;
-        }
-
-        return this.status;
-    }
-
-    public String getStatus() {
-        return this.status;
     }
 }
 

@@ -26,7 +26,6 @@ public class PaymentTest{
         payment.setId(uuid);
         payment.setMethod("voucherCode");
         payment.setPaymentData(voucherData);
-        payment.setStatus("SUCCESS");
 
         assertEquals(uuid, payment.getId());
         assertEquals("voucherCode", payment.getMethod());
@@ -43,7 +42,6 @@ public class PaymentTest{
         payment.setId(uuid);
         payment.setMethod("voucherCode");
         payment.setPaymentData(voucherData);
-        payment.setStatus("SUCCESS");
 
         assertEquals(uuid, payment.getId());
         assertEquals("voucherCode", payment.getMethod());
@@ -62,7 +60,6 @@ public class PaymentTest{
         payment.setId(uuid);
         payment.setMethod("voucherCode");
         payment.setPaymentData(newData);
-        payment.setStatus("SUCCESS");
 
         assertEquals(uuid, payment.getId());
         assertEquals("voucherCode", payment.getMethod());

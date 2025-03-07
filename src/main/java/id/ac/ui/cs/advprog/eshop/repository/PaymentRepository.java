@@ -18,16 +18,11 @@ public class PaymentRepository {
     }
 
     public Payment getPayment(String ID) {
-        Payment payment = lumbungPayment.get(ID);
-        return payment;
+        return lumbungPayment.get(ID);
     }
 
     public List<Payment> getAllPayments() {
         return new ArrayList<>(lumbungPayment.values());
     }
 
-    public void setStatus(String ID, String status) {
-        Payment payment = getPayment(ID);
-        payment.setStatus(status);
-    }
 }
